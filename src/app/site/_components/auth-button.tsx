@@ -1,0 +1,35 @@
+"use client";
+
+import { SignOutButton } from "@clerk/nextjs";
+import { User } from "@clerk/nextjs/server";
+import Link from "next/link";
+
+interface Props {
+  user?: null | User;
+}
+export const AuthButton = ({ user }: Props) => {
+  return (
+    <div className="flex gap-3 items-center">
+      <div className="flex gap-3 items-center">
+        {user ? (
+          <SignOutButton />
+        ) : (
+          <div className="flex gap-3 items-center">
+            <Link
+              href={"/agency/sign-in"}
+              className="text-white bg-theme px-4 py-2 rounded-lg font-semibold hover:bg-theme/80"
+            >
+              Sign In
+            </Link>
+            <Link
+              href={"/agency/sign-up"}
+              className="text-white bg-theme px-4 py-2 rounded-lg font-semibold hover:bg-theme/80"
+            >
+              Sign Up
+            </Link>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};

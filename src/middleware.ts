@@ -9,6 +9,7 @@ export default clerkMiddleware(async (auth, req) => {
   const pathWithSearchParams = `${url.pathname}${
     searchParams.length > 0 ? `?${searchParams}` : ""
   }`;
+
   // Get the hostname
   const hostname = req.headers.get("host");
 

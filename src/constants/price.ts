@@ -20,7 +20,7 @@ export const PRICE_PLAN = [
       "Customizable reports and charts",
       "Real-time data tracking",
     ],
-    priceId: "price_ferejferherljreh",
+    priceId: "price_1SSd2A6oBLNLcGa9kNi5NlBL",
     featured: true,
   },
   {
@@ -35,6 +35,6 @@ export const PRICE_PLAN = [
       "Unlimited data storage",
       "Advanced data segmentation",
     ],
-    priceId: "price_ferhelrhelrorehrf",
+    priceId: "price_1SSd346oBLNLcGa9rjJnE9BW",
   },
 ];

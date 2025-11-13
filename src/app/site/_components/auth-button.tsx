@@ -1,18 +1,15 @@
 "use client";
 
-import { SignOutButton } from "@clerk/nextjs";
-import { User } from "@clerk/nextjs/server";
+import { UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 
-interface Props {
-  user?: null | User;
-}
-export const AuthButton = ({ user }: Props) => {
+export const AuthButton = () => {
+  const { user } = useUser();
   return (
     <div className="flex gap-3 items-center">
       <div className="flex gap-3 items-center">
         {user ? (
-          <SignOutButton />
+          <UserButton />
         ) : (
           <div className="flex gap-3 items-center">
             <Link

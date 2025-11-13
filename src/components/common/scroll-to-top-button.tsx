@@ -17,7 +17,7 @@ export const ScrollToTopButton = ({ className, threshold = 200 }: Props) => {
           onClick={scrollToTop}
           variant="ghost"
           className={cn(
-            "fixed bottom-6 right-6 bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg z-50",
+            "fixed bottom-6 right-6 bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg size-10 z-50",
             className
           )}
         >

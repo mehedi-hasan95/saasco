@@ -54,8 +54,9 @@ export const SitePrice = () => {
             <Link href={`/agency?plan=${plan.priceId}`} className="w-full">
               <Button
                 className={cn(
-                  "w-full bg-theme/20 hover:bg-theme/40",
-                  plan.featured === true && "bg-theme hover:bg-theme/90"
+                  "w-full bg-theme/20 hover:bg-theme/40 text-white/80",
+                  plan.featured === true &&
+                    "bg-theme hover:bg-theme/90 text-white"
                 )}
               >
                 Get {plan.title}

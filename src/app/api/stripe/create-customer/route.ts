@@ -20,7 +20,7 @@ export async function POST(req: Request) {
 
     return Response.json({ customerId: customer.id });
   } catch (error) {
-    console.log("stripe create-customer api", error);
+    console.error("stripe create-customer api", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }

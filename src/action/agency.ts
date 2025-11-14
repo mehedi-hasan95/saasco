@@ -63,7 +63,6 @@ export const saveActivityLogsNotification = async ({
     });
   }
   if (!userData) {
-    console.log("Could not find a user");
     return;
   }
 
@@ -241,7 +240,7 @@ export const upsertAgency = async (user: Partial<User>, agency: Agency) => {
     });
     return agencyUpsert;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -284,7 +283,7 @@ export const createAgency = async (
     });
     return data.id;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -303,6 +302,6 @@ export const updateAgency = async (
       data: { ...agency },
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };

@@ -10,7 +10,7 @@ export const PRICE_PLAN = [
   {
     title: "Pro",
     description: "The ultimate agency kit",
-    price: "19",
+    price: "49",
     duration: "month",
     features: [
       "5 Subdomain",
@@ -20,13 +20,14 @@ export const PRICE_PLAN = [
       "Customizable reports and charts",
       "Real-time data tracking",
     ],
-    priceId: "price_1SSd2A6oBLNLcGa9kNi5NlBL",
+    priceId: "price_1SSq6J6oBLNLcGa9pDdeQMOo",
+
     featured: true,
   },
   {
     title: "Premium",
     description: "Perfect for serious agency",
-    price: "120",
+    price: "199",
     duration: "month",
     features: [
       "Unlimited Subdomain",
@@ -35,6 +36,13 @@ export const PRICE_PLAN = [
       "Unlimited data storage",
       "Advanced data segmentation",
     ],
-    priceId: "price_1SSd346oBLNLcGa9rjJnE9BW",
+    priceId: "price_1SSq6J6oBLNLcGa9jKnmw7ez",
+  },
+];
+
+export const ADD_ONS_PRODUCT = [
+  {
+    title: "Premium Support",
+    id: "prod_TPfV8GAGKImxEY",
   },
 ];

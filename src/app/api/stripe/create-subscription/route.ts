@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import { NextResponse } from "next/server";
+import { th } from "zod/v4/locales";
 
 export async function POST(req: Request) {
   const { customerId, priceId } = await req.json();
@@ -22,12 +23,10 @@ export async function POST(req: Request) {
       subscriptionExists.Subscription.active
     ) {
       if (!subscriptionExists.Subscription.subscritiptionId) {
-        throw new Error(
-          "Could nt find the subscription ID to update the subscription."
-        );
+        throw new Error("Subscription Id is missing");
       }
 
-      const currentSubscriptionDetails = await stripe.subscriptions.retrieve(
+      const currentSubsriptionDetails = await stripe.subscriptions.retrieve(
         subscriptionExists.Subscription.subscritiptionId
       );
 
@@ -35,36 +34,52 @@ export async function POST(req: Request) {
         subscriptionExists.Subscription.subscritiptionId,
         {
           items: [
-            { id: currentSubscriptionDetails.items.data[0].id, deleted: true },
-            { price: priceId },
+            {
+              id: currentSubsriptionDetails.items.data[0].id,
+              deleted: true,
+            },
+            {
+              price: priceId,
+            },
           ],
-          expand: ["latest_invoice.payment_intent"],
         }
       );
 
+      // Get the invoice ID
+      const invoiceId = subscription.latest_invoice as string;
+      const invoice = await stripe.invoices.retrieve(invoiceId, {
+        expand: ["confirmation_secret"],
+      });
+      const clientSecret = invoice.confirmation_secret?.client_secret;
+
       return NextResponse.json({
         subscriptionId: subscription.id,
-        //@ts-ignore
-        clientSecret: subscription.latest_invoice.payment_intent.client_secret,
+        clientSecret,
       });
     } else {
-      console.log("From create subscription api: creating a sbubscription");
-
       const subscription = await stripe.subscriptions.create({
         customer: customerId,
         items: [{ price: priceId }],
         payment_behavior: "default_incomplete",
-        payment_settings: { save_default_payment_method: "on_subscription" },
-        expand: ["latest_invoice.payment_intent"],
+        payment_settings: {
+          save_default_payment_method: "on_subscription",
+        },
       });
+
+      // Get the invoice ID
+      const invoiceId = subscription.latest_invoice as string;
+      const invoice = await stripe.invoices.retrieve(invoiceId, {
+        expand: ["confirmation_secret"],
+      });
+      const clientSecret = invoice.confirmation_secret?.client_secret;
+
       return NextResponse.json({
         subscriptionId: subscription.id,
-        //@ts-ignore
-        clientSecret: subscription.latest_invoice.payment_intent.client_secret,
+        clientSecret,
       });
     }
   } catch (error) {
-    console.log("subscription api error: ", error);
-    return new NextResponse("Internal server error", { status: 500 });
+    console.error("Stripe subscription api error: ", error);
+    return new NextResponse("Internal error", { status: 500 });
   }
 }

@@ -5,5 +5,5 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     name: "SaasCo",
     version: "0.1.0",
   },
-  typescript: true,
+  // typescript: true,
 });

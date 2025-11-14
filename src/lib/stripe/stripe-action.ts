@@ -19,8 +19,6 @@ export const subscriptionCreated = async (
       throw new Error("Could not fould any agency to upsert the subscription");
     }
 
-    console.log("This is from stripe-action", subscription);
-
     const data = {
       active: subscription.status === "active",
       agencyId: agency.id,
@@ -39,7 +37,7 @@ export const subscriptionCreated = async (
       update: data,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 

@@ -23,7 +23,7 @@ const Page = async ({
         return redirect(`/agency/${agencyId}/billing?plan=${plan}`);
       }
       if (state) {
-        const statePath = state.split("__")[0];
+        const statePath = state.split("___")[0];
         const stateAgencyId = state.split("___")[1];
         if (!stateAgencyId) {
           return <p>Not Authorized</p>;

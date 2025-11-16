@@ -24,7 +24,6 @@ const Page = async ({ params }: Props) => {
     product: process.env.NEXT_PUBLIC_STRIPE_PRODUCT_ID,
     active: true,
   });
-
   const currentPlanDetails = PRICE_PLAN.find(
     (c) => c.priceId === agencySubscription?.Subscription?.priceId
   );
@@ -89,6 +88,28 @@ const Page = async ({ params }: Props) => {
               : "Starter"
           }
         />
+        {addOns.data.map((addon) => (
+          <PricingCard
+            planExists={agencySubscription?.Subscription?.active === true}
+            prices={prices.data}
+            customerId={agencySubscription?.customerId || ""}
+            key={addon.id}
+            amt={
+              //@ts-ignore
+              addon.default_price.unit_amount
+                ? //@ts-ignore
+                  `$${addon.default_price.unit_amount / 100}`
+                : "$0"
+            }
+            buttonCta="Subscribe"
+            description="Dedicated support line & teams channel for support"
+            duration="/ month"
+            features={[]}
+            title="24/7 priority support"
+            highlightTitle="Get support now"
+            highlightDescription="Get priority support and skip the long long with the click of a button"
+          />
+        ))}
       </div>
     </>
   );

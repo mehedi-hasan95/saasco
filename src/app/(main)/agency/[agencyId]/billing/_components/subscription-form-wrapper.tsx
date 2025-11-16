@@ -57,17 +57,14 @@ const SubscriptionFormWrapper = ({ customerId, planExists }: Props) => {
         }
       );
       const subscriptionResponseData = await subscriptionResponse.json();
-      console.log("60", subscriptionResponseData);
       setSubscription({
         clientSecret: subscriptionResponseData.clientSecret,
         subscriptionId: subscriptionResponseData.subscriptionId,
       });
       if (planExists) {
-        // toast({
-        //   title: 'Success',
-        //   description: 'Your plan has been successfully upgraded!',
-        // })
-        toast("Success");
+        toast("Success", {
+          description: "Your plan has been successfully upgraded!",
+        });
         setClose();
         router.refresh();
       }
